@@ -1,0 +1,18 @@
+{
+  "name": "Versio Duo – edit",
+  "short_name": "V2 edit",
+  "start_url": "./",
+  "scope": ".",
+  "icons": [{
+    "src": "icons/logo-boxed.png",
+    "sizes": "512x512",
+    "purpose": "any"
+  }, {
+    "src": "icons/logo-maskable.svg",
+    "sizes": "150x150",
+    "purpose": "maskable"
+  }],
+  "theme_color": "black",
+  "background_color": "black",
+  "display": "standalone"
+}

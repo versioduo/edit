@@ -1,0 +1,132 @@
+/* Progress bar */
+.progress::-webkit-progress-bar {
+  background-color: hsl(0, 0%, 86%);
+}
+
+/* Range Slider */
+input[type=range].range {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+input[type=range].range::-webkit-slider-runnable-track {
+  height: 0.75rem;
+  background-color: hsl(0, 0%, 86%);
+  border: none;
+  border-radius: 0.375rem;
+}
+
+input[type=range].range::-moz-range-track {
+  height: 0.75rem;
+  background-color: hsl(0, 0%, 86%);
+  border: none;
+  border-radius: 0.375rem;
+}
+
+input[type=range].range::-webkit-slider-thumb {
+  pointer-events: auto;
+  -webkit-appearance: none;
+  border: none;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 28%);
+  margin-top: -0.625rem;
+  cursor: pointer;
+}
+
+input[type=range].range::-moz-range-thumb {
+  pointer-events: auto;
+  -moz-appearance: none;
+  border: none;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 28%);
+  margin-top: -0.625rem;
+  cursor: pointer;
+}
+
+input[type=range].range:disabled {
+  opacity: 25%;
+  cursor: not-allowed
+}
+
+input[type=range].range:focus {
+  outline: none;
+}
+
+/* Checkbox styled as switch */
+.switch {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  position: relative;
+}
+
+.switch input[type=checkbox] {
+  position: absolute;
+  left: 0;
+  outline: none;
+  opacity: 0;
+  z-index: -1;
+}
+
+.switch input[type=checkbox]+.check {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 6rem;
+  height: 2.5rem;
+  padding: 0.25rem;
+  background-color: hsl(0, 0%, 86%);
+  border-radius: 0.25rem;
+}
+
+.field.has-addons .control:not(:first-child):not(:last-child) .switch input[type=checkbox]+.check {
+  border-radius: 0;
+}
+
+.field.has-addons .control:first-child:not(:only-child) .switch input[type=checkbox]+.check {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.field.has-addons .control:last-child:not(:only-child) .switch input[type=checkbox]+.check {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.switch input[type=checkbox]+.check:before {
+  content: "";
+  display: block;
+  border-radius: 0.15rem;
+  width: 2.75rem;
+  height: 2rem;
+  background-color: white;
+  transition: transform 100ms ease-out;
+  will-change: transform;
+  transform-origin: left;
+}
+
+.switch input[type=checkbox]:checked+.check {
+  background-color: hsl(229, 53%, 53%);
+}
+
+.switch input[type=checkbox]:checked+.check:before {
+  transform: translate3d(100%, 0, 0);
+}
+
+.switch:hover input[type=checkbox]+.check {
+  background-color: hsl(0, 0%, 71%);
+}
+
+.switch:hover input[type=checkbox]:checked+.check {
+  background-color: hsl(229, 53%, 48%);
+}
