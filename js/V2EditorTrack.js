@@ -403,7 +403,7 @@ class V2EditorTrack extends V2WebModule {
       addDetail('Marker', events.meta.marker);
 
     if (events.meta.cuePoint > 0)
-      addDetail('Cue Point', vents.meta.cuePoint);
+      addDetail('Cue Point', events.meta.cuePoint);
 
     if (events.meta.programName > 0)
       addDetail('Program Name', events.meta.programName);
