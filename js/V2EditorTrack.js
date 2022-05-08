@@ -548,7 +548,7 @@ class V2EditorTrack extends V2WebModule {
             break;
 
           case V2MIDIFile.Meta.cuePoint:
-            addEvent(event, number, true, 'Cue Point', event.data);
+            addEvent(event, number, true, 'Cue Point', new TextDecoder().decode(event.data));
             break;
 
           case V2MIDIFile.Meta.programName:
