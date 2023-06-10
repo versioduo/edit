@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="name" content="edit">
+  <meta name="version" content="96">
+  <meta name="revised" content="2023-06-10">
+  <meta name="copyright" content="Kay Sievers, kay@versioduo.com">
+  <meta name="license" href="LICENSE">
+  <meta name="rating" content="safe for kids">
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <title>Versio Duo – edit</title>
+  <meta name="description" content="MIDI Editor">
+  <link rel="canonical" href="https://versioduo.com/edit">
+  <link rel="source" href="https://github.com/versioduo/edit">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="black">
+  <link rel="icon" href="icons/logo-black.svg" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="icons/logo.svg" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="stylesheet" href="css/bulma-addons.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/fontawesome.min.css">
+  <style>
+    html {
+      background-color: black;
+      scroll-padding-top: 3.25rem;
+      scroll-behavior: smooth;
+      overflow: auto;
+    }
+
+    body {
+      font-family: 'DIN 1451', sans-serif;
+    }
+
+    .navbar {
+      opacity: 95%;
+    }
+
+    section {
+      background-color: hsl(0, 0%, 92%);
+      padding: 1rem;
+    }
+
+    section:not(:first-of-type) {
+      margin-top: 0.25rem;
+    }
+
+    /* Do not mess with the DIN font, fake bold looks really ugly */
+    .title {
+      font-weight: 400;
+    }
+
+    .width-label {
+      width: 6rem;
+    }
+
+    .inactive {
+      pointer-events: none;
+    }
+
+    .centered {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body class="has-navbar-fixed-top">
+  <nav class="navbar is-fixed-top is-black" aria-label="navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-home navbar-item is-size-4 pl-4" href="#">
+          <img src="icons/logo.svg" alt="" style="width: auto; height: 1.5rem;">
+          <h1 class="ml-3">
+            edit
+          </h1>
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span class="inactive" aria-hidden="true"></span>
+          <span class="inactive" aria-hidden="true"></span>
+          <span class="inactive" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-menu">
+        <div class="navbar-start"></div>
+      </div>
+    </div>
+  </nav>
+
+  <script src="js/V2Web.js"></script>
+  <script src="js/V2MIDI.js"></script>
+  <script src="js/V2MIDIFile.js"></script>
+  <script src="js/V2EditorTrack.js"></script>
+  <script src="js/V2Editor.js"></script>
+  <script>
+    'use strict';
+
+    {
+      // Initialize the menu.
+      V2Web.setup();
+
+      const editor = new V2Editor();
+
+      // Cache the content for offline operation.
+      V2Web.registerServiceWorker('service-worker.js', (state, newWorker) => {
+        // There is no worker during the intial setup.
+        if (!navigator.serviceWorker.controller)
+          return;
+
+        switch (state) {
+          case 'installed':
+            // A new version was installed into the cache and a new worker is waiting to take control.
+            V2Web.notifyUpdate('A fresh version is available', () => {
+              newWorker.postMessage({
+                type: 'skipWaiting'
+              });
+            });
+            break;
+
+          case 'activated':
+            // A new worker took control over the page.
+            location.reload();
+            break;
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
