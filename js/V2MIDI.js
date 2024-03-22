@@ -975,7 +975,7 @@ class V2MIDIDevice {
     if (!this.output)
       return;
 
-    const bits = value + 8192;
+    const bits = Number(value) + 8192;
     const msb = (bits >> 7) & 0x7f;
     const lsb = bits & 0x7f;
     this.output.send([V2MIDI.Status.pitchBend | channel, lsb, msb]);
