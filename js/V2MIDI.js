@@ -1,6 +1,3 @@
-// © Kay Sievers <kay@versioduo.com>, 2019-2023
-// SPDX-License-Identifier: Apache-2.0
-
 // MIDI system connection and message handling.
 class V2MIDI {
   // MIDI Note Number

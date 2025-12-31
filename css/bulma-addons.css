@@ -1,3 +1,8 @@
+/* Insert a Zero Width Space to set the height. */
+.button:empty:after {
+  content: '\200b';
+}
+
 /* Progress bar */
 .progress::-webkit-progress-bar {
   background-color: hsl(0, 0%, 86%);
@@ -86,7 +91,7 @@ input[type=range].range:focus {
   height: 2.5rem;
   padding: 0.25rem;
   background-color: hsl(0, 0%, 86%);
-  border-radius: 0.25rem;
+  border-radius: var(--bulma-radius);
 }
 
 .field.has-addons .control:not(:first-child):not(:last-child) .switch input[type=checkbox]+.check {
@@ -116,7 +121,7 @@ input[type=range].range:focus {
 }
 
 .switch input[type=checkbox]:checked+.check {
-  background-color: hsl(229, 53%, 53%);
+  background-color: hsl(var(--bulma-link-h), var(--bulma-link-s), var(--bulma-link-l));
 }
 
 .switch input[type=checkbox]:checked+.check:before {
@@ -124,9 +129,9 @@ input[type=range].range:focus {
 }
 
 .switch:hover input[type=checkbox]+.check {
-  background-color: hsl(0, 0%, 71%);
+  background-color: hsl(0, 0%, 80%);
 }
 
 .switch:hover input[type=checkbox]:checked+.check {
-  background-color: hsl(229, 53%, 48%);
+  background-color: hsl(var(--bulma-link-h), var(--bulma-link-s), calc(var(--bulma-link-l) + var(--bulma-hover-background-l-delta)));
 }

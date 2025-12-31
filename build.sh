@@ -44,7 +44,7 @@ case "$1" in
 
   sync)
     echo "Syncing files:"
-    rsync -a --log-format=%f --exclude=.git --omit-dir-times --checksum --existing ../../versioduo/V2Web/ .
+    rsync -a --log-format=%f --exclude=.git --exclude=README.md --omit-dir-times --checksum --existing ../../versioduo/V2Web/ .
     exit
     ;;
 
