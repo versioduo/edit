@@ -91,7 +91,7 @@ input[type=range].range:focus {
   height: 2.5rem;
   padding: 0.25rem;
   background-color: hsl(0, 0%, 86%);
-  border-radius: var(--bulma-radius);
+  border-radius: var(--bulma-radius-rounded);
 }
 
 .field.has-addons .control:not(:first-child):not(:last-child) .switch input[type=checkbox]+.check {
@@ -118,6 +118,7 @@ input[type=range].range:focus {
   transition: transform 100ms ease-out;
   will-change: transform;
   transform-origin: left;
+  border-radius: var(--bulma-radius-rounded);
 }
 
 .switch input[type=checkbox]:checked+.check {

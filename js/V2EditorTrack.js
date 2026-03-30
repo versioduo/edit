@@ -122,6 +122,7 @@ class V2EditorTrack extends V2WebModule {
 
         field.addElement('span', (e) => {
           e.classList.add('select');
+          e.classList.add('is-rounded');
 
           V2Web.addElement(e, 'select', (select) => {
             select.addEventListener('change', () => {
@@ -206,7 +207,7 @@ class V2EditorTrack extends V2WebModule {
           e.textContent = value;
         });
       });
-    }
+    };
 
     let events = Object.seal({
       all: 0,
@@ -254,7 +255,7 @@ class V2EditorTrack extends V2WebModule {
       events.all++;
 
       if (event.meta !== null) {
-        events.meta.all++
+        events.meta.all++;
 
         switch (event.meta) {
           case V2MIDIFile.Meta.sequence:
@@ -331,7 +332,7 @@ class V2EditorTrack extends V2WebModule {
         }
 
       } else if (event.status !== null) {
-        events.midi.all++
+        events.midi.all++;
 
         switch (V2MIDI.Status.getType(event.status)) {
           case V2MIDI.Status.noteOn:
@@ -514,7 +515,7 @@ class V2EditorTrack extends V2WebModule {
           e.textContent = data;
         });
       });
-    }
+    };
 
     for (const [number, event] of this.#midiTrack.events.entries()) {
       if (event.meta !== null) {

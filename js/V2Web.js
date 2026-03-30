@@ -193,6 +193,7 @@ class V2Web {
   static addButton(element, handler) {
     const e = document.createElement('button');
     e.classList.add('button');
+    e.classList.add('is-rounded');
     if (handler)
       handler(e);
 
@@ -315,6 +316,7 @@ class V2WebField {
   addButton(handler) {
     this.addElement('button', (e, p) => {
       e.classList.add('button');
+      e.classList.add('is-rounded');
 
       if (handler)
         handler(e, p);
@@ -324,6 +326,7 @@ class V2WebField {
   addInput(type, handler) {
     this.addElement('input', (e, p) => {
       e.classList.add('input');
+      e.classList.add('is-rounded');
       e.type = type;
 
       if (handler)
@@ -346,6 +349,8 @@ class V2WebTabs {
 
       V2Web.addElement(tabs, 'div', (e) => {
         e.classList.add('tabs');
+        e.classList.add('is-toggle');
+        e.classList.add('is-toggle-rounded');
         e.classList.add('is-centered');
         e.classList.add('is-fullwidth');
         e.classList.add('is-boxed');
