@@ -1,5 +1,5 @@
 const name = 'edit';
-const version = 99;
+const version = 102;
 const files = [
   './',
   'css/bulma-addons.css',
