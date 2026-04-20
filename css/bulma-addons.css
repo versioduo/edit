@@ -5,7 +5,7 @@
 
 /* Progress bar */
 .progress::-webkit-progress-bar {
-  background-color: hsl(0, 0%, 86%);
+  background-color: hsl(var(--bulma-scheme-h), var(--bulma-scheme-s), var(--bulma-border-l));
 }
 
 /* Range Slider */
@@ -19,14 +19,14 @@ input[type=range].range {
 
 input[type=range].range::-webkit-slider-runnable-track {
   height: 0.75rem;
-  background-color: hsl(0, 0%, 86%);
+  background-color: hsl(var(--bulma-scheme-h), var(--bulma-scheme-s), var(--bulma-border-l));
   border: none;
   border-radius: 0.375rem;
 }
 
 input[type=range].range::-moz-range-track {
   height: 0.75rem;
-  background-color: hsl(0, 0%, 86%);
+  background-color: hsl(var(--bulma-scheme-h), var(--bulma-scheme-s), var(--bulma-border-l));
   border: none;
   border-radius: 0.375rem;
 }
@@ -38,9 +38,13 @@ input[type=range].range::-webkit-slider-thumb {
   height: 2rem;
   width: 2rem;
   border-radius: 50%;
-  background-color: hsl(0, 0%, 28%);
+  background-color: hsl(var(--bulma-scheme-h), var(--bulma-scheme-s), var(--bulma-dark-l));
   margin-top: -0.625rem;
   cursor: pointer;
+}
+
+input[type=range].range::-webkit-slider-thumb:hover {
+  background-color: hsl(var(--bulma-scheme-h), var(--bulma-scheme-s), calc(var(--bulma-dark-l) + var(--bulma-hover-color-l-delta)));
 }
 
 input[type=range].range::-moz-range-thumb {
@@ -50,9 +54,13 @@ input[type=range].range::-moz-range-thumb {
   height: 2rem;
   width: 2rem;
   border-radius: 50%;
-  background-color: hsl(0, 0%, 28%);
+  background-color: hsl(var(--bulma-scheme-h), var(--bulma-scheme-s), var(--bulma-dark-l));
   margin-top: -0.625rem;
   cursor: pointer;
+}
+
+input[type=range].range::-moz-range-thumb:hover {
+  background-color: hsl(var(--bulma-scheme-h), var(--bulma-scheme-s), calc(var(--bulma-dark-l) + var(--bulma-hover-color-l-delta)));
 }
 
 input[type=range].range:disabled {
@@ -90,7 +98,7 @@ input[type=range].range:focus {
   width: 6rem;
   height: 2.5rem;
   padding: 0.25rem;
-  background-color: hsl(0, 0%, 86%);
+  background-color: hsl(var(--bulma-scheme-h), var(--bulma-scheme-s), var(--bulma-border-l));
   border-radius: var(--bulma-radius-rounded);
 }
 
@@ -122,7 +130,7 @@ input[type=range].range:focus {
 }
 
 .switch input[type=checkbox]:checked+.check {
-  background-color: hsl(var(--bulma-link-h), var(--bulma-link-s), var(--bulma-link-l));
+  background-color: hsl(var(--bulma-scheme-h), var(--bulma-scheme-s), var(--bulma-dark-l));
 }
 
 .switch input[type=checkbox]:checked+.check:before {
@@ -130,9 +138,9 @@ input[type=range].range:focus {
 }
 
 .switch:hover input[type=checkbox]+.check {
-  background-color: hsl(0, 0%, 80%);
+  background-color: hsl(var(--bulma-scheme-h), var(--bulma-scheme-s), calc(var(--bulma-border-l) + var(--bulma-hover-color-l-delta)));
 }
 
 .switch:hover input[type=checkbox]:checked+.check {
-  background-color: hsl(var(--bulma-link-h), var(--bulma-link-s), calc(var(--bulma-link-l) + var(--bulma-hover-background-l-delta)));
+  background-color: hsl(var(--bulma-scheme-h), var(--bulma-scheme-s), calc(var(--bulma-dark-l) + var(--bulma-hover-color-l-delta)));
 }
