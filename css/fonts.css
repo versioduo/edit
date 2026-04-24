@@ -59,3 +59,11 @@
 .fa-music:before {
   content: "\f001";
 }
+
+.fa-sliders:before {
+  content: "\f1de";
+}
+
+.fa-plug:before {
+  content: "\f1e6";
+}
