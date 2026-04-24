@@ -353,7 +353,6 @@ class V2WebTabs {
         e.classList.add('is-toggle-rounded');
         e.classList.add('is-centered');
         e.classList.add('is-fullwidth');
-        e.classList.add('is-boxed');
 
         V2Web.addElement(e, 'ul', (ul) => {
           this.#elementsTabs = ul;
@@ -371,7 +370,7 @@ class V2WebTabs {
     this.#notifiers.push(handler);
   }
 
-  addTab(name, text, handler) {
+  addTab(name, text, icon, handler) {
     this.#tabs[name] = {};
 
     V2Web.addElement(this.#elementsTabs, 'li', (e) => {
@@ -384,7 +383,15 @@ class V2WebTabs {
       });
 
       V2Web.addElement(e, 'a', (e) => {
-        e.textContent = text;
+        V2Web.addElement(e, 'span', (span) => {
+          span.classList.add('icon');
+          span.classList.add('is-small');
+          V2Web.addElement(span, 'i', (i) => {
+            i.classList.add('fa');
+            i.classList.add('fa-' + icon);
+          });
+        });
+        V2Web.addElement(e, 'span', (span) => { span.textContent = text; });
       });
 
       this.#tabs[name].tab = e;

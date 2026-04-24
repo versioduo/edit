@@ -43,15 +43,15 @@ class V2EditorTrack extends V2WebModule {
     new V2WebTabs(this.canvas, (tabs) => {
       this.#tabs = tabs;
 
-      tabs.addTab('track', 'Track', (e) => {
+      tabs.addTab('track', 'Track', 'book-open-reader', (e) => {
         this.#track.element = e;
       });
 
-      tabs.addTab('details', 'Details', (e) => {
+      tabs.addTab('details', 'Details', 'magnifying-glass-chart', (e) => {
         this.#details.element = e;
       });
 
-      tabs.addTab('events', 'Events', (e) => {
+      tabs.addTab('events', 'Events', 'music', (e) => {
         this.#events.element = e;
       });
     });
