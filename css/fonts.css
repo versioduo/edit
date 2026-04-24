@@ -7,15 +7,11 @@
 }
 
 @font-face {
-  font-family: 'Font Awesome';
+  font-family: 'Font Awesome Solid';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 900;
   font-display: auto;
-  src: url("../webfonts/fa-regular-400.woff2") format("woff2");
-}
-
-.fa {
-  font-family: 'Font Awesome';
+  src: url("../webfonts/fa-solid-900.woff2") format("woff2");
 }
 
 @font-face {
@@ -26,46 +22,40 @@
   src: url("../webfonts/fa-brands-400.woff2") format("woff2");
 }
 
-.fa-brands {
-  font-family: 'Font Awesome Brands';
-}
-
-@font-face {
+.fa {
   font-family: 'Font Awesome Solid';
   font-style: normal;
-  font-weight: 900;
-  font-display: auto;
-  src: url("../webfonts/fa-solid-900.woff2") format("woff2");
 }
 
-.fa-solid {
-  font-family: 'Font Awesome Solid';
+.fa-brands {
+  font-family: 'Font Awesome Brands';
+  font-style: normal;
 }
 
-.fa-microchip {
-  --fa: "\f2db"
+.fa-microchip:before {
+  content: "\f2db";
 }
 
-.fa-magnifying-glass-chart {
-  --fa: "\e522"
+.fa-magnifying-glass-chart:before {
+  content: "\e522";
 }
 
-.fa-computer {
-  --fa: "\e4e5"
+.fa-computer:before {
+  content: "\e4e5";
 }
 
-.fa-book-open-reader {
-  --fa: "\f5da"
+.fa-book-open-reader:before {
+  content: "\f5da";
 }
 
-.fa-screwdriver-wrench {
-  --fa: "\f7d9"
+.fa-screwdriver-wrench:before {
+  content: "\f7d9";
 }
 
-.fa-file-code {
-  --fa: "\f1c9"
+.fa-file-code:before {
+  content: "\f1c9";
 }
 
-.fa-music {
-  --fa: "\f001"
+.fa-music:before {
+  content: "\f001";
 }
