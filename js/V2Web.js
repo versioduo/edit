@@ -383,15 +383,11 @@ class V2WebTabs {
       });
 
       V2Web.addElement(e, 'a', (e) => {
-        V2Web.addElement(e, 'span', (span) => {
-          span.classList.add('icon');
-          span.classList.add('is-small');
-          V2Web.addElement(span, 'i', (i) => {
-            i.classList.add('fa');
-            i.classList.add('fa-' + icon);
-          });
+        V2Web.addElement(e, 'span', (s) => {
+          s.classList.add('icon');
+          s.classList.add('icon-' + icon);
         });
-        V2Web.addElement(e, 'span', (span) => { span.textContent = text; });
+        V2Web.addElement(e, 'span', (s) => { s.textContent = text; });
       });
 
       this.#tabs[name].tab = e;

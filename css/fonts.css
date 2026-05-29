@@ -1,69 +1,84 @@
 @font-face {
   font-family: 'DIN 1451';
-  font-style: normal;
-  font-weight: normal;
-  font-display: auto;
   src: url('../webfonts/AlteDIN1451Mittelschrift.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Font Awesome Solid';
-  font-style: normal;
-  font-weight: 900;
-  font-display: auto;
   src: url("../webfonts/fa-solid-900.woff2") format("woff2");
 }
 
 @font-face {
   font-family: 'Font Awesome Brands';
-  font-style: normal;
-  font-weight: normal;
-  font-display: auto;
   src: url("../webfonts/fa-brands-400.woff2") format("woff2");
 }
 
-.fa {
+.icon-microchip:before {
   font-family: 'Font Awesome Solid';
-  font-style: normal;
+  content: '\f2db';
 }
 
-.fa-brands {
+.icon-magnifying-glass-chart:before {
+  font-family: 'Font Awesome Solid';
+  content: '\e522';
+}
+
+.icon-computer:before {
+  font-family: 'Font Awesome Solid';
+  content: '\e4e5';
+}
+
+.icon-book-open-reader:before {
+  font-family: 'Font Awesome Solid';
+  content: '\f5da';
+}
+
+.icon-screwdriver-wrench:before {
+  font-family: 'Font Awesome Solid';
+  content: '\f7d9';
+}
+
+.icon-file-code:before {
+  font-family: 'Font Awesome Solid';
+  content: '\f1c9';
+}
+
+.icon-music:before {
+  font-family: 'Font Awesome Solid';
+  content: '\f001';
+}
+
+.icon-sliders:before {
+  font-family: 'Font Awesome Solid';
+  content: '\f1de';
+}
+
+.icon-plug:before {
+  font-family: 'Font Awesome Solid';
+  content: '\f1e6';
+}
+
+.icon-envelope:before {
+  font-family: 'Font Awesome Solid';
+  content: '\f0e0';
+}
+
+.icon-github:before {
   font-family: 'Font Awesome Brands';
-  font-style: normal;
+  content: '\f09b';
 }
 
-.fa-microchip:before {
-  content: "\f2db";
+.icon-mastodon:before {
+  font-family: 'Font Awesome Brands';
+  content: '\f4f6';
 }
 
-.fa-magnifying-glass-chart:before {
-  content: "\e522";
+.icon-instagram:before {
+  font-family: 'Font Awesome Brands';
+  content: '\f16d';
 }
 
-.fa-computer:before {
-  content: "\e4e5";
-}
-
-.fa-book-open-reader:before {
-  content: "\f5da";
-}
-
-.fa-screwdriver-wrench:before {
-  content: "\f7d9";
-}
-
-.fa-file-code:before {
-  content: "\f1c9";
-}
-
-.fa-music:before {
-  content: "\f001";
-}
-
-.fa-sliders:before {
-  content: "\f1de";
-}
-
-.fa-plug:before {
-  content: "\f1e6";
+.icon-youtube:before {
+  font-family: 'Font Awesome Brands';
+  content: '\f167';
 }
