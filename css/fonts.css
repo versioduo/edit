@@ -13,72 +13,177 @@
   src: url("../webfonts/fa-brands-400.woff2") format("woff2");
 }
 
-.icon-microchip:before {
-  font-family: 'Font Awesome Solid';
-  content: '\f2db';
-}
+i.icon {
+  font-style: normal;
+  font-weight: normal;
+  margin-right: 0.5rem;
 
-.icon-magnifying-glass-chart:before {
-  font-family: 'Font Awesome Solid';
-  content: '\e522';
-}
+  &.--nospace {
+    margin: 0;
+  }
 
-.icon-computer:before {
-  font-family: 'Font Awesome Solid';
-  content: '\e4e5';
-}
+  &.--address-card:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f2bb';
+  }
 
-.icon-book-open-reader:before {
-  font-family: 'Font Awesome Solid';
-  content: '\f5da';
-}
+  &.--at:before {
+    font-family: 'Font Awesome Solid';
+    content: '\40';
+  }
 
-.icon-screwdriver-wrench:before {
-  font-family: 'Font Awesome Solid';
-  content: '\f7d9';
-}
+  &.--book-open-reader:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f5da';
+  }
 
-.icon-file-code:before {
-  font-family: 'Font Awesome Solid';
-  content: '\f1c9';
-}
+  &.--bug:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f188';
+  }
 
-.icon-music:before {
-  font-family: 'Font Awesome Solid';
-  content: '\f001';
-}
+  &.--code-branch:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f126';
+  }
 
-.icon-sliders:before {
-  font-family: 'Font Awesome Solid';
-  content: '\f1de';
-}
+  &.--compass:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f14e';
+  }
 
-.icon-plug:before {
-  font-family: 'Font Awesome Solid';
-  content: '\f1e6';
-}
+  &.--computer:before {
+    font-family: 'Font Awesome Solid';
+    content: '\e4e5';
+  }
 
-.icon-envelope:before {
-  font-family: 'Font Awesome Solid';
-  content: '\f0e0';
-}
+  &.--console:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f120';
+  }
 
-.icon-github:before {
-  font-family: 'Font Awesome Brands';
-  content: '\f09b';
-}
+  &.--copy:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f0c5';
+  }
 
-.icon-mastodon:before {
-  font-family: 'Font Awesome Brands';
-  content: '\f4f6';
-}
+  &.--envelope:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f0e0';
+  }
 
-.icon-instagram:before {
-  font-family: 'Font Awesome Brands';
-  content: '\f16d';
-}
+  &.--file-code:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f1c9';
+  }
 
-.icon-youtube:before {
-  font-family: 'Font Awesome Brands';
-  content: '\f167';
+  &.--gear:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f013';
+  }
+
+  &.--guitar:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f7a6';
+  }
+
+  &.--icons:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f86d';
+  }
+
+  &.--link:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f0c1';
+  }
+
+  &.--list:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f03a';
+  }
+
+  &.--magnifying-glass-chart:before {
+    font-family: 'Font Awesome Solid';
+    content: '\e522';
+  }
+
+  &.--microchip:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f2db';
+  }
+
+  &.--minus:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f068';
+  }
+
+  &.--music:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f001';
+  }
+
+  &.--play:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f04b';
+  }
+
+  &.--plug:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f1e6';
+  }
+
+  &.--plus:before {
+    font-family: 'Font Awesome Solid';
+    content: '\2b';
+  }
+
+  &.--right-to-bracket:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f2f6';
+  }
+
+  &.--right-from-bracket:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f2f5';
+  }
+
+  &.--rotate:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f2f1';
+  }
+
+  &.--screwdriver-wrench:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f7d9';
+  }
+
+  &.--sliders:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f1de';
+  }
+
+  &.--xmark:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f00d';
+  }
+
+  &.--github:before {
+    font-family: 'Font Awesome Brands';
+    content: '\f09b';
+  }
+
+  &.--instagram:before {
+    font-family: 'Font Awesome Brands';
+    content: '\f16d';
+  }
+
+  &.--mastodon:before {
+    font-family: 'Font Awesome Brands';
+    content: '\f4f6';
+  }
+
+  &.--youtube:before {
+    font-family: 'Font Awesome Brands';
+    content: '\f167';
+  }
 }

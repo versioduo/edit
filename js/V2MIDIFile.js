@@ -357,7 +357,7 @@ class V2MIDIFile {
   static Meta = Object.freeze({
     sequence: 0x00,
     text: 0x01,
-    copyright: 0x02,
+    creator: 0x02,
     title: 0x03,
     instrument: 0x04,
     lyric: 0x05,

@@ -1,7 +1,4 @@
-// © Kay Sievers <kay@versioduo.com>, 2019-2022
-// SPDX-License-Identifier: Apache-2.0
-
-class V2EditorTrack extends V2WebModule {
+class V2EditorTrack extends V2AppSection {
   #midiFile = null;
   #midiTrack = null;
   #index = null;
@@ -20,16 +17,17 @@ class V2EditorTrack extends V2WebModule {
   });
 
   constructor(editor, midiFile, index) {
-    super('track' + (index + 1), index + 1);
-    this.attach();
+    super('track-' + (index + 1), '--music', '#' + (index + 1));
+    this.addSection();
 
     this.#midiFile = midiFile;
     this.#midiTrack = this.#midiFile.tracks[index];
     this.#index = index;
 
     if (this.#index > 0 && this.#midiFile.tracks.length > 2) {
-      V2Web.addButtons(this.canvas, (buttons) => {
-        V2Web.addButton(buttons, (e) => {
+      new V2AppMenu(this.canvas, (menu) => {
+        menu.addElement('button', (e) => {
+          e.classList.add('warn');
           e.textContent = 'Delete';
           e.addEventListener('click', () => {
             this.#midiFile.deleteTrack(this.#index);
@@ -40,24 +38,23 @@ class V2EditorTrack extends V2WebModule {
       });
     }
 
-    new V2WebTabs(this.canvas, (tabs) => {
+    new V2AppTabs(this.canvas, (tabs) => {
       this.#tabs = tabs;
 
-      tabs.addTab('track', 'Track', 'book-open-reader', (e) => {
+      tabs.add('track', '--book-open-reader', 'Track', (e) => {
         this.#track.element = e;
       });
 
-      tabs.addTab('details', 'Details', 'magnifying-glass-chart', (e) => {
+      tabs.add('details', '--magnifying-glass-chart', 'Details', (e) => {
         this.#details.element = e;
       });
 
-      tabs.addTab('events', 'Events', 'music', (e) => {
+      tabs.add('events', '--list', 'Events', (e) => {
         this.#events.element = e;
       });
     });
 
-    this.#tabs.switchTab('track');
-
+    this.#tabs.switch('track');
     this.#addTrack();
     this.#addDetails();
     this.#addEvents();
@@ -66,44 +63,49 @@ class V2EditorTrack extends V2WebModule {
   }
 
   #addTrack() {
-    new V2WebField(this.#track.element, (field) => {
-      field.addButton((e) => {
-        e.classList.add('width-label');
-        e.classList.add('has-background-grey-lighter');
-        e.classList.add('inactive');
+    new V2AppMenu(this.#track.element, (menu) => {
+      menu.element.classList.add('full');
+
+      menu.addElement('span', (e) => {
+        e.classList.add('label');
         e.textContent = 'Title';
-        e.tabIndex = -1;
       });
 
-      field.addInput('text', (e, p) => {
-        p.classList.add('is-expanded');
+      menu.addElement('input', (e) => {
+        e.type = 'text';
+        e.classList.add('grow');
         e.value = this.#midiTrack.getTag('title');
-        e.addEventListener('change', () => {
-          if (e.value === '')
-            this.#midiTrack.deleteTag('title');
+        this.title('--music', '#' + (this.#index + 1), e.value);
 
-          else
+        e.addEventListener('change', () => {
+          if (e.value === '') {
+            this.#midiTrack.deleteTag('title');
+            this.title(null, '#' + (this.#index + 1));
+
+          } else {
             this.#midiTrack.setTag('title', e.value);
+            this.title('--music', '#' + (this.#index + 1), e.value);
+          }
           this.#refresh();
         });
       });
     });
 
     if (this.#index === 0) {
-      new V2WebField(this.#track.element, (field) => {
-        field.addButton((e) => {
-          e.classList.add('width-label');
-          e.classList.add('has-background-grey-lighter');
-          e.classList.add('inactive');
-          e.textContent = 'Copyright';
-          e.tabIndex = -1;
+      new V2AppMenu(this.#track.element, (menu) => {
+        menu.element.classList.add('full');
+
+        menu.addElement('span', (e) => {
+          e.classList.add('label');
+          e.textContent = 'Creator';
         });
 
-        field.addInput('text', (e, p) => {
-          p.classList.add('is-expanded');
-          e.value = this.#midiTrack.getTag('copyright');
+        menu.addElement('input', (e) => {
+          e.type = 'text';
+          e.classList.add('grow');
+          e.value = this.#midiTrack.getTag('creator');
           e.addEventListener('change', () => {
-            this.#midiTrack.setTag('copyright', e.value);
+            this.#midiTrack.setTag('creator', e.value);
             this.#refresh();
           });
         });
@@ -111,63 +113,59 @@ class V2EditorTrack extends V2WebModule {
     }
 
     if (this.#index > 0 || this.#midiFile.format === 0) {
-      new V2WebField(this.#track.element, (field) => {
-        field.addButton((e) => {
-          e.classList.add('width-label');
-          e.classList.add('has-background-grey-lighter');
-          e.classList.add('inactive');
+      new V2AppMenu(this.#track.element, (menu) => {
+        menu.element.classList.add('full');
+
+        menu.addElement('span', (e) => {
+          e.classList.add('label');
           e.textContent = 'Program';
-          e.tabIndex = -1;
         });
 
-        field.addElement('span', (e) => {
-          e.classList.add('select');
-          e.classList.add('is-rounded');
+        menu.addElement('select', (select) => {
+          select.classList.add('grow');
 
-          V2Web.addElement(e, 'select', (select) => {
-            select.addEventListener('change', () => {
-              if (select.value === '')
-                this.#midiTrack.deleteProgram(select.value);
+          select.addEventListener('change', () => {
+            if (select.value === '')
+              this.#midiTrack.deleteProgram(select.value);
 
-              else
-                this.#midiTrack.setProgram(select.value);
-              this.#refresh();
-            });
-
-            const program = this.#midiTrack.getProgram();
-
-            // No or delete program change.
-            V2Web.addElement(select, 'option', (e) => {
-              e.textContent = '';
-              e.value = '';
-            });
-
-            for (const [index, name] of Object.entries(V2MIDI.GM.Program.Name)) {
-              const i = Number(index);
-
-              V2Web.addElement(select, 'option', (e) => {
-                e.textContent = (i + 1) + ' – ' + name;
-                e.value = Number(i);
-                if (program !== null && program === i)
-                  e.selected = true;
-              });
-            }
+            else
+              this.#midiTrack.setProgram(select.value);
+            this.#refresh();
           });
+
+          const program = this.#midiTrack.getProgram();
+
+          // No or delete program change.
+          V2App.addElement(select, 'option', (e) => {
+            e.textContent = '';
+            e.value = '';
+          });
+
+          for (const [index, name] of Object.entries(V2MIDI.GM.Program.Name)) {
+            const i = Number(index);
+
+            V2App.addElement(select, 'option', (e) => {
+              e.textContent = (i + 1) + ' – ' + name;
+              e.value = Number(i);
+              if (program !== null && program === i)
+                e.selected = true;
+            });
+          }
         });
       });
 
-      new V2WebField(this.#track.element, (field) => {
-        field.addButton((e) => {
-          e.classList.add('width-label');
-          e.classList.add('has-background-grey-lighter');
-          e.classList.add('inactive');
+      new V2AppMenu(this.#track.element, (menu) => {
+        menu.element.classList.add('full');
+
+        menu.addElement('span', (e) => {
+          e.classList.add('label');
           e.textContent = 'Device';
-          e.tabIndex = -1;
         });
 
-        field.addInput('text', (e, p) => {
-          p.classList.add('is-expanded');
+        menu.addElement('input', (e) => {
+          e.classList.add('grow');
           e.value = this.#midiTrack.getTag('deviceName');
+          e.type = 'text';
           e.addEventListener('change', () => {
             if (e.value === '')
               this.#midiTrack.deleteTag('deviceName');
@@ -182,28 +180,19 @@ class V2EditorTrack extends V2WebModule {
   }
 
   #addDetails() {
-    V2Web.addElement(this.#details.element, 'div', (container) => {
-      container.classList.add('table-container');
-
-      V2Web.addElement(container, 'table', (table) => {
-        table.classList.add('table');
-        table.classList.add('is-fullwidth');
-        table.classList.add('is-striped');
-        table.classList.add('is-narrow');
-
-        V2Web.addElement(table, 'tbody', (e) => {
-          this.#details.table = e;
-        });
+    V2App.addElement(this.#details.element, 'table', (table) => {
+      V2App.addElement(table, 'tbody', (e) => {
+        this.#details.table = e;
       });
     });
 
     const addDetail = (name, value) => {
-      V2Web.addElement(this.#details.table, 'tr', (row) => {
-        V2Web.addElement(row, 'td', (e) => {
+      V2App.addElement(this.#details.table, 'tr', (row) => {
+        V2App.addElement(row, 'td', (e) => {
           e.textContent = name;
         });
 
-        V2Web.addElement(row, 'td', (e) => {
+        V2App.addElement(row, 'td', (e) => {
           e.textContent = value;
         });
       });
@@ -216,7 +205,7 @@ class V2EditorTrack extends V2WebModule {
         all: 0,
         sequence: 0,
         text: 0,
-        copyright: 0,
+        creator: 0,
         title: 0,
         instrument: 0,
         lyric: 0,
@@ -266,8 +255,8 @@ class V2EditorTrack extends V2WebModule {
             events.meta.text++;
             break;
 
-          case V2MIDIFile.Meta.copyright:
-            events.meta.copyright++;
+          case V2MIDIFile.Meta.creator:
+            events.meta.creator++;
             break;
 
           case V2MIDIFile.Meta.title:
@@ -388,8 +377,8 @@ class V2EditorTrack extends V2WebModule {
     if (events.meta.text > 0)
       addDetail('Text', events.meta.text);
 
-    if (events.meta.copyright > 0)
-      addDetail('Copyright', events.meta.copyright);
+    if (events.meta.creator > 0)
+      addDetail('Creator', events.meta.creator);
 
     if (events.meta.title > 0)
       addDetail('Title', events.meta.title);
@@ -465,53 +454,50 @@ class V2EditorTrack extends V2WebModule {
   }
 
   #addEvents() {
-    V2Web.addElement(this.#events.element, 'div', (container) => {
-      container.classList.add('table-container');
-
-      V2Web.addElement(container, 'table', (table) => {
-        table.classList.add('table');
-        table.classList.add('is-fullwidth');
-        table.classList.add('is-striped');
-        table.classList.add('is-narrow');
-
-        V2Web.addElement(table, 'tbody', (e) => {
-          this.#events.table = e;
-        });
+    V2App.addElement(this.#events.element, 'table', (table) => {
+      V2App.addElement(table, 'tbody', (e) => {
+        this.#events.table = e;
       });
     });
 
     const addEvent = (event, number, remove, name, data, title = '') => {
-      V2Web.addElement(this.#events.table, 'tr', (row) => {
-        V2Web.addElement(row, 'th', (e) => {
+      V2App.addElement(this.#events.table, 'tr', (row) => {
+        V2App.addElement(row, 'th', (e) => {
           e.textContent = number + 1;
         });
 
-        V2Web.addElement(row, 'td', (button) => {
-          V2Web.addElement(button, 'button', (e) => {
-            e.classList.add('delete');
-            e.classList.add('centered');
+        V2App.addElement(row, 'td', (e) => {
+          e.style.alignContent = 'center';
 
-            if (remove && event.delta === 0) {
-              e.addEventListener('click', () => {
-                this.#midiTrack.deleteEvent(number);
-                this.#refresh();
+          if (remove && event.delta === 0) {
+            new V2AppMenu(e, (menu) => {
+              menu.element.style.margin = 0;
+
+              menu.addElement('button', (e) => {
+                e.classList.add('delete');
+
+                e.addEventListener('click', () => {
+                  this.#midiTrack.deleteEvent(number);
+                  this.#refresh();
+                });
               });
-
-            } else
-              e.classList.add('is-invisible');
-          });
+            });
+          }
         });
 
-        V2Web.addElement(row, 'td', (e) => {
+        V2App.addElement(row, 'td', (e) => {
+          e.style.alignContent = 'center';
           e.textContent = name;
         });
 
-        V2Web.addElement(row, 'td', (e) => {
+        V2App.addElement(row, 'td', (e) => {
+          e.style.alignContent = 'center';
           if (event.delta > 0)
             e.textContent = (event.delta / this.#midiFile.division).toFixed(2);
         });
 
-        V2Web.addElement(row, 'td', (e) => {
+        V2App.addElement(row, 'td', (e) => {
+          e.style.alignContent = 'center';
           e.textContent = data;
         });
       });
@@ -528,8 +514,8 @@ class V2EditorTrack extends V2WebModule {
             addEvent(event, number, true, 'Text', new TextDecoder().decode(event.data));
             break;
 
-          case V2MIDIFile.Meta.copyright:
-            addEvent(event, number, true, 'Copyright', new TextDecoder().decode(event.data));
+          case V2MIDIFile.Meta.creator:
+            addEvent(event, number, true, 'Creator', new TextDecoder().decode(event.data));
             break;
 
           case V2MIDIFile.Meta.title:

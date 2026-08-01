@@ -1,21 +1,18 @@
 const name = 'edit';
-const version = 107;
+const version = 440;
 const files = [
   './',
-  'css/bulma-addons.css',
-  'css/bulma.min.css',
   'css/fonts.css',
+  'css/style.css',
   'icons/logo-black.svg',
-  'icons/logo-boxed.png',
-  'icons/logo-boxed.svg',
   'icons/logo-maskable.svg',
   'icons/logo.svg',
+  'js/V2App.js',
   'js/V2Editor.js',
   'js/V2EditorTrack.js',
   'js/V2MIDI.js',
   'js/V2MIDIFile.js',
-  'js/V2Web.js',
-  'site.webmanifest',
+  'manifest.json',
   'webfonts/AlteDIN1451Mittelschrift.woff2',
   'webfonts/fa-brands-400.woff2',
   'webfonts/fa-solid-900.woff2'

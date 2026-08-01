@@ -1,7 +1,4 @@
-// © Kay Sievers <kay@versioduo.com>, 2019-2022
-// SPDX-License-Identifier: Apache-2.0
-
-class V2Editor extends V2WebModule {
+class V2Editor extends V2AppSection {
   #bannerNotify = null;
   #save = null;
   #fileName = null;
@@ -11,28 +8,28 @@ class V2Editor extends V2WebModule {
   #tracks = [];
 
   constructor() {
-    super();
-    this.attach();
+    super('editor');
+    this.addSection();
 
-    this.#bannerNotify = new V2WebNotify(this.canvas);
+    this.#bannerNotify = new V2AppNotify(this.canvas);
 
-    new V2WebField(this.canvas, (field) => {
-      field.addButton((e) => {
+    new V2AppMenu(this.canvas, (menu) => {
+      menu.addElement('button', (e) => {
         e.textContent = 'Load';
         e.addEventListener('click', () => {
           this.reset();
           this.#openFile();
         });
 
-        V2Web.addFileDrop(e, this.canvas, ['is-focused', 'is-link', 'is-light'], (file) => {
+        V2App.addFileDrop(e, this.canvas, ['highlight', 'info'], (file) => {
           this.reset();
           this.#readFile(file);
         });
       });
 
-      field.addButton((e) => {
+      menu.addElement('button', (e) => {
         this.#save = e;
-        e.classList.add('is-link');
+        e.classList.add('primary');
         e.textContent = 'Save';
         e.addEventListener('click', () => {
           this.#saveFile();
@@ -42,10 +39,9 @@ class V2Editor extends V2WebModule {
 
     this.#save.disabled = true;
 
-    V2Web.addElement(this.canvas, 'div', (e) => {
+    V2App.addElement(this.canvas, 'p', (e) => {
       this.#info = e;
-      e.classList.add('is-flex');
-      e.classList.add('is-justify-content-end');
+      e.classList.add('center');
       e.innerHTML = '<a href=' + document.querySelector('link[rel="source"]').href +
         ' target="software">' + document.querySelector('meta[name="name"]').content +
         '</a>, version ' + Number(document.querySelector('meta[name="version"]').content);
@@ -55,48 +51,41 @@ class V2Editor extends V2WebModule {
   }
 
   show() {
-    V2Web.addElement(this.canvas, 'div', (container) => {
+    V2App.addElement(this.canvas, 'div', (container) => {
       if (this.#info)
         this.#info.remove();
 
       this.#info = container;
-      container.classList.add('table-container');
-
-      V2Web.addElement(container, 'table', (table) => {
-        table.classList.add('table');
-        table.classList.add('is-fullwidth');
-        table.classList.add('is-striped');
-        table.classList.add('is-narrow');
-
-        V2Web.addElement(table, 'tbody', (e) => {
+      V2App.addElement(container, 'table', (table) => {
+        V2App.addElement(table, 'tbody', (e) => {
           this.#infoElement = e;
         });
       });
 
       const addInfo = (name, value) => {
-        V2Web.addElement(this.#infoElement, 'tr', (row) => {
-          V2Web.addElement(row, 'td', (e) => {
+        V2App.addElement(this.#infoElement, 'tr', (row) => {
+          V2App.addElement(row, 'td', (e) => {
             e.textContent = name;
           });
 
-          V2Web.addElement(row, 'td', (e) => {
+          V2App.addElement(row, 'td', (e) => {
             e.textContent = value;
           });
         });
-      }
+      };
     });
 
     const addDetail = (name, value) => {
-      V2Web.addElement(this.#infoElement, 'tr', (row) => {
-        V2Web.addElement(row, 'td', (e) => {
+      V2App.addElement(this.#infoElement, 'tr', (row) => {
+        V2App.addElement(row, 'td', (e) => {
           e.textContent = name;
         });
 
-        V2Web.addElement(row, 'td', (e) => {
+        V2App.addElement(row, 'td', (e) => {
           e.textContent = value;
         });
       });
-    }
+    };
 
     addDetail('File', this.#fileName);
     const minutes = Math.trunc(this.#midiFile.runtimeSec / 60);
@@ -119,7 +108,7 @@ class V2Editor extends V2WebModule {
       this.#info.remove();
 
     for (const track of this.#tracks)
-      track.detach();
+      track.removeSection();
     this.#tracks = [];
   }
 
