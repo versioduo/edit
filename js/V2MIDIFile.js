@@ -7,7 +7,7 @@ class V2MIDIFileEvent {
   tick = 0;
 
   constructor() {
-    return Object.seal(this);
+    Object.seal(this);
   }
 
   getTempoUsec() {
@@ -65,7 +65,7 @@ class V2MIDIFileTrack {
       }
     });
 
-    return Object.seal(this);
+    Object.seal(this);
   }
 
   parse(buffer) {
@@ -390,33 +390,38 @@ class V2MIDIFile {
         return this.#tracks;
       }
     });
+
     Object.defineProperty(this, 'format', {
       get() {
         return this.#format;
       }
     });
+
     Object.defineProperty(this, 'division', {
       get() {
         return this.#division;
       }
     });
+
     Object.defineProperty(this, 'tickMax', {
       get() {
         return this.#tickMax;
       }
     });
+
     Object.defineProperty(this, 'tempi', {
       get() {
         return this.#tempi;
       }
     });
+
     Object.defineProperty(this, 'runtimeSec', {
       get() {
         return this.#runtimeSec;
       }
     });
 
-    return Object.seal(this);
+    Object.seal(this);
   }
 
   loadBuffer(buffer) {
@@ -586,7 +591,7 @@ class V2MIDIFilePlayer extends V2MIDIFile {
 
   constructor() {
     super();
-    return Object.seal(this);
+    Object.seal(this);
   }
 
   addNotifier(type, handler) {

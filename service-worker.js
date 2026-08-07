@@ -1,5 +1,5 @@
 const name = 'edit';
-const version = 440;
+const version = 443;
 const files = [
   './',
   'css/fonts.css',

@@ -12,23 +12,24 @@ class V2App {
 
     if (handler)
       handler(this);
-
-    return Object.seal(this);
   }
 
-  addSection(s, handler) {
-    this.#sections.push(s);
+  addSection(section, args, handler) {
+    const s = new section(this, ...(args || []));
 
     if (handler)
       handler(s);
+
+    this.#sections.push(s);
+    return s;
   }
 
-  call(action, data) {
+  callSections(action, ...args) {
     for (const s of this.#sections) {
       if (typeof s[action] !== 'function')
         continue;
 
-      s[action](data);
+      s[action](...args);
     }
   }
 
@@ -163,6 +164,7 @@ class V2App {
 }
 
 class V2AppSection {
+  app = null;
   id = null;
   canvas = null;
 
@@ -173,12 +175,16 @@ class V2AppSection {
     subtitle: null
   });
 
-  constructor(id, icon, title, subtitle) {
+  constructor(app, id, icon, title, subtitle) {
+    if (!app)
+      throw Error('V2AppSection: Missing app.');
+
     if (!id)
       throw Error('V2AppSection: Missing section identifier.');
 
-    this.title(icon, title, subtitle);
+    this.app = app;
     this.id = id;
+    this.title(icon, title, subtitle);
     this.canvas = document.createElement('section');
     this.canvas.id = this.id;
   }
@@ -265,16 +271,16 @@ class V2AppNotify {
   #elementText = null;
 
   constructor(canvas) {
-    V2App.addElement(canvas, 'div', (notify) => {
-      this.#element = notify;
+    Object.seal(this);
+
+    V2App.addElement(canvas, 'div', (e) => {
+      this.#element = e;
       this.#element.style.display = 'none';
       this.#element.classList.add('notify');
     });
-
-    return Object.seal(this);
   }
 
-  clear(text) {
+  clear() {
     this.#element.style.display = 'none';
     this.#element.classList.remove('--info', '--warn', '--error');
     this.#element.innerHTML = '';
@@ -316,7 +322,7 @@ class V2AppMenu {
         handler(this);
     });
 
-    return Object.seal(this);
+    Object.seal(this);
   }
 
   addItem(handler) {
@@ -361,7 +367,7 @@ class V2AppTabs {
     if (handler)
       handler(this);
 
-    return Object.seal(this);
+    Object.seal(this);
   }
 
   addNotifier(handler) {

@@ -667,7 +667,7 @@ class V2MIDI {
   });
 
   constructor() {
-    return Object.seal(this);
+    Object.seal(this);
   }
 
   addNotifier(type, handler) {
@@ -826,7 +826,7 @@ class V2MIDIDevice {
   });
 
   constructor() {
-    return Object.seal(this);
+    Object.seal(this);
   }
 
   addNotifier(type, handler) {

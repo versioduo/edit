@@ -16,8 +16,9 @@ class V2EditorTrack extends V2AppSection {
     table: null
   });
 
-  constructor(editor, midiFile, index) {
-    super('track-' + (index + 1), '--music', '#' + (index + 1));
+  constructor(app, midiFile, index) {
+    super(app, 'track-' + (index + 1), '--music', '#' + (index + 1));
+    Object.seal(this);
     this.addSection();
 
     this.#midiFile = midiFile;
@@ -31,8 +32,8 @@ class V2EditorTrack extends V2AppSection {
           e.textContent = 'Delete';
           e.addEventListener('click', () => {
             this.#midiFile.deleteTrack(this.#index);
-            editor.reset();
-            editor.show();
+            this.app.editor.reset();
+            this.app.editor.show();
           });
         });
       });
@@ -58,8 +59,6 @@ class V2EditorTrack extends V2AppSection {
     this.#addTrack();
     this.#addDetails();
     this.#addEvents();
-
-    return Object.seal(this);
   }
 
   #addTrack() {

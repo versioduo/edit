@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <meta name="name" content="edit">
     <meta name="description" content="MIDI Device Configuration">
-    <meta name="version" content="440">
-    <meta name="revised" content="2026-08-06">
+    <meta name="version" content="443">
+    <meta name="revised" content="2026-08-07">
     <meta name="copyright" content="Anyone can use this public domain work without having to seek authorisation, no one can ever own it.">
     <meta name="rating" content="safe for kids">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,10 @@
       'use strict';
 
       new V2App((app) => {
-        new V2Editor();
+        app.editor = null;
+        Object.seal(app);
+
+        new V2Editor(app);
 
         // Cache the content for offline operation.
         app.registerServiceWorker('service-worker.js', (state, newWorker) => {

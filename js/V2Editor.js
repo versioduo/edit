@@ -7,8 +7,10 @@ class V2Editor extends V2AppSection {
   #midiFile = null;
   #tracks = [];
 
-  constructor() {
-    super('editor');
+  constructor(app) {
+    super(app, 'editor');
+    Object.seal(this);
+    app.editor = this;
     this.addSection();
 
     this.#bannerNotify = new V2AppNotify(this.canvas);
@@ -46,8 +48,6 @@ class V2Editor extends V2AppSection {
         ' target="software">' + document.querySelector('meta[name="name"]').content +
         '</a>, version ' + Number(document.querySelector('meta[name="version"]').content);
     });
-
-    return Object.seal(this);
   }
 
   show() {
@@ -95,7 +95,7 @@ class V2Editor extends V2AppSection {
     addDetail('Tracks', this.#midiFile.tracks.length);
 
     for (const [i, track] of this.#midiFile.tracks.entries())
-      this.#tracks.push(new V2EditorTrack(this, this.#midiFile, i));
+      this.#tracks.push(this.app.addSection(V2EditorTrack, [this.#midiFile, i]));
 
     this.#save.disabled = false;
   }
