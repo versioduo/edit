@@ -39,7 +39,7 @@ class V2EditorTrack extends V2AppSection {
       });
     }
 
-    new V2AppTabs(this.canvas, (tabs) => {
+    new V2AppTabs(this.canvas, this.id, (tabs) => {
       this.#tabs = tabs;
 
       tabs.add('track', '--book-open-reader', 'Track', (e) => {
