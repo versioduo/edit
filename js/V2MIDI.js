@@ -838,14 +838,18 @@ class V2MIDIDevice {
     return (this.input ? this.input.id : '') + ':' + (this.output ? this.output.id : '');
   }
 
-  getName() {
-    if (this.input)
-      return this.input.name;
+  getValue(key) {
+    if (this.input?.[key])
+      return this.input[key];
 
-    if (this.output)
-      return this.output.name;
+    if (this.output?.[key])
+      return this.output[key];
 
     return null;
+  }
+
+  getName() {
+    return this.getValue('name');
   }
 
   disconnect() {
