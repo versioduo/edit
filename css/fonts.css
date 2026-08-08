@@ -42,6 +42,11 @@ i.icon {
     content: '\f188';
   }
 
+  &.--circle-info:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f05a';
+  }
+
   &.--code-branch:before {
     font-family: 'Font Awesome Solid';
     content: '\f126';

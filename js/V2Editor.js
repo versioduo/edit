@@ -8,7 +8,7 @@ class V2Editor extends V2AppSection {
   #tracks = [];
 
   constructor(app) {
-    super(app, 'editor');
+    super(app, 'editor', '--file-code', 'File');
     Object.seal(this);
     app.editor = this;
     this.addSection();

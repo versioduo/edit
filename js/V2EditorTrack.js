@@ -74,17 +74,12 @@ class V2EditorTrack extends V2AppSection {
         e.type = 'text';
         e.classList.add('grow');
         e.value = this.#midiTrack.getTag('title');
-        this.title('--music', '#' + (this.#index + 1), e.value);
 
         e.addEventListener('change', () => {
-          if (e.value === '') {
+          if (e.value === '')
             this.#midiTrack.deleteTag('title');
-            this.title(null, '#' + (this.#index + 1));
-
-          } else {
+          else
             this.#midiTrack.setTag('title', e.value);
-            this.title('--music', '#' + (this.#index + 1), e.value);
-          }
           this.#refresh();
         });
       });
