@@ -9,6 +9,7 @@ class V2App {
     connect: null,
     debug: null
   });
+  main = null;
   #sections = [];
 
   constructor(handler) {
@@ -230,7 +231,7 @@ class V2AppSection {
   id = null;
   nav = Object.seal({
     entry: null,
-    cards: null
+    entries: null
   });
   canvas = null;
 
@@ -260,40 +261,42 @@ class V2AppSection {
     if (this.canvas.parentNode)
       throw Error('V2AppSection: The section #' + this.id + ' is already added.');
 
-    V2App.addElement(this.canvas, 'hgroup', (hg) => {
-      V2App.addElement(hg, 'h2', (e) => {
-        V2App.addElement(e, 'i', (i) => {
-          i.classList.add('icon', this.header.icon);
-        });
-
-        e.append(this.header.title);
-      });
-
-      if (this.header.subtitle) {
-        V2App.addElement(hg, 'p', (e) => {
-          e.textContent = this.header.subtitle;
-        });
-      }
-    });
-
-    V2App.addElement(this.app.nav, 'li', (li) => {
-      this.nav.entry = li;
-
-      V2App.addElement(li, 'a', (e) => {
-        e.href = '#' + this.id;
-
-        if (this.header.icon)
+    if (this.header.title) {
+      V2App.addElement(this.canvas, 'hgroup', (hg) => {
+        V2App.addElement(hg, 'h2', (e) => {
           V2App.addElement(e, 'i', (i) => {
             i.classList.add('icon', this.header.icon);
           });
 
-        e.append(this.header.title);
+          e.append(this.header.title);
+        });
+
+        if (this.header.subtitle) {
+          V2App.addElement(hg, 'p', (e) => {
+            e.textContent = this.header.subtitle;
+          });
+        }
       });
 
-      V2App.addElement(li, 'ul', (e) => {
-        this.nav.cards = e;
+      V2App.addElement(this.app.nav, 'li', (li) => {
+        this.nav.entry = li;
+
+        V2App.addElement(li, 'a', (e) => {
+          e.href = '#' + this.id;
+
+          if (this.header.icon)
+            V2App.addElement(e, 'i', (i) => {
+              i.classList.add('icon', this.header.icon);
+            });
+
+          e.append(this.header.title);
+        });
+
+        V2App.addElement(li, 'ul', (e) => {
+          this.nav.entries = e;
+        });
       });
-    });
+    }
 
     document.querySelector('main').appendChild(this.canvas);
   }
@@ -305,7 +308,7 @@ class V2AppSection {
   }
 
   addNavigation(title, id) {
-    V2App.addElement(this.nav.cards, 'a', (e) => {
+    V2App.addElement(this.nav.entries, 'a', (e) => {
       e.href = '#' + id;
       e.append(title);
     });
@@ -332,7 +335,7 @@ class V2AppNotify {
     this.element.replaceChildren();
     V2App.addElement(this.element, 'p', (e) => {
       e.classList.add('--info');
-      e.append(text);
+      e.innerHTML = text;
     });
   }
 
@@ -340,7 +343,7 @@ class V2AppNotify {
     this.element.replaceChildren();
     V2App.addElement(this.element, 'p', (e) => {
       e.classList.add('--warn');
-      e.append(text);
+      e.innerHTML = text;
     });
   }
 
@@ -348,7 +351,7 @@ class V2AppNotify {
     this.element.replaceChildren();
     V2App.addElement(this.element, 'p', (e) => {
       e.classList.add('--error');
-      e.append(text);
+      e.innerHTML = text;
     });
   }
 }
@@ -371,18 +374,16 @@ class V2AppMenu {
   }
 
   addItem(handler) {
-    V2App.addElement(this.element, 'li', (li) => {
+    return V2App.addElement(this.element, 'li', (li) => {
       if (handler)
         handler(li);
     });
   }
 
   addElement(element, handler) {
-    this.addItem((li) => {
-      V2App.addElement(li, element, (e) => {
-        if (handler)
-          handler(e);
-      });
+    return V2App.addElement(this.addItem(), element, (e) => {
+      if (handler)
+        handler(e);
     });
   }
 

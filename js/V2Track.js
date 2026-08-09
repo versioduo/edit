@@ -1,4 +1,4 @@
-class V2EditorTrack extends V2AppSection {
+class V2Track extends V2AppSection {
   #midiFile = null;
   #midiTrack = null;
   #index = null;
@@ -16,8 +16,8 @@ class V2EditorTrack extends V2AppSection {
     table: null
   });
 
-  constructor(app, midiFile, index) {
-    super(app, 'track-' + (index + 1), '--music', '#' + (index + 1));
+  constructor(app, midiFile, index, subtitle) {
+    super(app, 'track-' + (index + 1), '--music', '#' + (index + 1), subtitle);
     Object.seal(this);
     this.addSection();
 
@@ -32,8 +32,8 @@ class V2EditorTrack extends V2AppSection {
           e.textContent = 'Delete';
           e.addEventListener('click', () => {
             this.#midiFile.deleteTrack(this.#index);
-            this.app.editor.reset();
-            this.app.editor.show();
+            this.app.main.reset();
+            this.app.main.show();
           });
         });
       });
@@ -619,13 +619,13 @@ class V2EditorTrack extends V2AppSection {
   }
 
   #refresh() {
-    this.#tabs.resetTab('track');
+    this.#track.element.replaceChildren();
     this.#addTrack();
 
-    this.#tabs.resetTab('details');
+    this.#details.element.replaceChildren();
     this.#addDetails();
 
-    this.#tabs.resetTab('events');
+    this.#events.element.replaceChildren();
     this.#addEvents();
   }
 }

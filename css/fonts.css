@@ -42,6 +42,11 @@ i.icon {
     content: '\f188';
   }
 
+  &.--chess-board:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f43c';
+  }
+
   &.--circle-info:before {
     font-family: 'Font Awesome Solid';
     content: '\f05a';
@@ -75,6 +80,11 @@ i.icon {
   &.--envelope:before {
     font-family: 'Font Awesome Solid';
     content: '\f0e0';
+  }
+
+  &.--file-audio:before {
+    font-family: 'Font Awesome Solid';
+    content: '\f1c7';
   }
 
   &.--file-code:before {

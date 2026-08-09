@@ -1,4 +1,4 @@
-class V2Editor extends V2AppSection {
+class V2Main extends V2AppSection {
   #bannerNotify = null;
   #save = null;
   #fileName = null;
@@ -8,9 +8,10 @@ class V2Editor extends V2AppSection {
   #tracks = [];
 
   constructor(app) {
-    super(app, 'editor', '--file-code', 'File');
+    super(app, 'editor', '--file-audio', 'File', 'Load, Edit, and Save MIDI Data');
     Object.seal(this);
-    app.editor = this;
+
+    app.main = this;
     this.addSection();
 
     this.#bannerNotify = new V2AppNotify(this.canvas);
@@ -94,8 +95,10 @@ class V2Editor extends V2AppSection {
     addDetail('Format Version', this.#midiFile.format + 1);
     addDetail('Tracks', this.#midiFile.tracks.length);
 
-    for (const [i, track] of this.#midiFile.tracks.entries())
-      this.#tracks.push(this.app.addSection(V2EditorTrack, [this.#midiFile, i]));
+    for (const [i, track] of this.#midiFile.tracks.entries()) {
+      const meta = (i === 0) && (this.#midiFile.format === 1);
+      this.#tracks.push(this.app.addSection(V2Track, [this.#midiFile, i, 'Edit the ' + (meta ? 'Metadata' : 'Instrument') + ' Track']));
+    }
 
     this.#save.disabled = false;
   }

@@ -351,6 +351,7 @@ html {
           border-right: 1rem solid transparent;
           overflow: hidden;
           text-overflow: ellipsis;
+          opacity: 100%;
         }
 
         >button,
@@ -675,6 +676,16 @@ html {
       width: 100%;
       z-index: 1;
 
+      &.--grid {
+        >details>ul {
+          grid-template-columns: repeat(auto-fit, minmax(var(--content-width), 1fr));
+        }
+
+        &.--cards>details>ul {
+          padding-left: 1rem;
+        }
+      }
+
       a {
         text-decoration: none;
       }
@@ -724,12 +735,23 @@ html {
         }
 
         >ul {
+          column-gap: 0.5rem;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(var(--content-width), 1fr));
           max-height: calc(100vh - 3rem);
+          width: 100%;
           overflow-y: auto;
-          padding: 0.5rem;
-          min-width: fit-content;
+          padding-left: 0.5rem;
+
+          >li {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            max-width: calc(var(--content-width) * 1.5);
+            padding-right: 0.5rem;
+            padding-left: 0.5rem;
+            width: 100%;
+          }
 
           a {
             align-content: center;

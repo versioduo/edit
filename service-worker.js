@@ -1,5 +1,5 @@
 const name = 'edit';
-const version = 453;
+const version = 110;
 const files = [
   './',
   'css/fonts.css',
@@ -8,10 +8,10 @@ const files = [
   'icons/logo-maskable.svg',
   'icons/logo.svg',
   'js/V2App.js',
-  'js/V2Editor.js',
-  'js/V2EditorTrack.js',
   'js/V2MIDI.js',
   'js/V2MIDIFile.js',
+  'js/V2Main.js',
+  'js/V2Track.js',
   'manifest.json',
   'webfonts/AlteDIN1451Mittelschrift.woff2',
   'webfonts/fa-brands-400.woff2',

@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <meta name="name" content="edit">
     <meta name="description" content="MIDI Device Configuration">
-    <meta name="version" content="453">
-    <meta name="revised" content="2026-08-09">
+    <meta name="version" content="110">
+    <meta name="revised" content="2026-08-16">
     <meta name="copyright" content="Anyone can use this public domain work without having to seek authorisation, no one can ever own it.">
     <meta name="rating" content="safe for kids">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <nav>
+    <nav class="--grid">
       <h1>
         <a href="#">V2 edit</a>
       </h1>
@@ -30,19 +30,18 @@
     </nav>
     <main class="--grid"></main>
     <script src="js/V2App.js"></script>
-    <script src="js/V2Editor.js"></script>
-    <script src="js/V2EditorTrack.js"></script>
+    <script src="js/V2Main.js"></script>
     <script src="js/V2MIDI.js"></script>
     <script src="js/V2MIDIFile.js"></script>
+    <script src="js/V2Track.js"></script>
     <script>
       'use strict';
 
       try {
         new V2App((app) => {
-          app.editor = null;
           Object.seal(app);
 
-          new V2Editor(app);
+          new V2Main(app);
           app.serviceWorker('service-worker.js');
         });
       } catch (error) {
